@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <script src="../js/apiClient.js"></script>
+</header>
+
+<body>
+    <script>
+        window.onload = () => {
+            // Call the API 
+            getUserList((res) => {
+                setUserSelectOption(res)
+            });
+        }
+
+        function setUserSelectOption(users) {
+            // Get select element
+            const select = document.getElementById("user-select");
+            // Get all option tag in select
+            const options = select.getElementsByTagName("option");
+            // Remove them to create the new List
+            while (options.length > 0) {
+                options[0].remove();
+            }
+            console.log(users);
+            //Create an empty option
+            const emptyOption = document.createElement('option');
+            emptyOption.innerHTML = "--Sélectionnes ton nom--";
+            emptyOption.className = "userOpt"
+            select.appendChild(emptyOption);
+            // Create option element for each user
+            users.forEach(user => {
+                const newOption = document.createElement('option');
+                newOption.value = user.name;
+                newOption.innerHTML = user.name;
+                newOption.className = "userOpt"
+                select.appendChild(newOption);
+            });
+        }
+
+
+        function pickTaget() {
+            const select = document.getElementById("user-select");
+            findAssociatedUser(select.value, (targetName) => {
+                alert("Tu es le père Noël secret de " + targetName)
+            })
+        }
+    </script>
+    <p style="color:blue">Hello Bra'!!</p>
+    <select id="user-select">
+        <option>ByBy</option>
+        <option>A plus</option>
+    </select>
+    <button onclick="pickTaget()">PICK</button>
+</body>
+
+</html>

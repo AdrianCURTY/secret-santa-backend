@@ -26,6 +26,9 @@ const db=dbService.createDb(dbConfig.dbFolder,{nativeObjectID: true});
 
 app.use("/",express.static('src/html'));
 app.use("/js",express.static('src/js'));
+app.use("/css",express.static('src/css'));
+app.use("/img",express.static('src/img'));
+
 
 app.get('/users', (req, res) => {
     var collection = db.collection("user");
